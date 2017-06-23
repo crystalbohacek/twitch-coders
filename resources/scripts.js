@@ -38,14 +38,14 @@ function loadStreamers(){
   }
 
   for (var i = globalStartIndex; i < globalEndIndex; i++) {
-    ajax(twitchStreamers[i]);
+    ajax(twitchStreamers[i], i);
   }
 
   globalStartIndex = globalEndIndex + 1;
   globalEndIndex = globalStartIndex + 5;
 }
 
-function ajax(twitchStreamer){ 
+function ajax(twitchStreamer, i){ 
   $loadMoreButton.text('Loading...');
   $.ajax({
     url: "https://wind-bow.glitch.me/twitch-api/streams/" + twitchStreamer + "?callback=?",
@@ -53,14 +53,16 @@ function ajax(twitchStreamer){
       var data = JSON.parse(result.substring(32,result.length-2)); 
 
       if (data.stream){
-        output = '<li><h3>' + data.stream.channel.display_name + '</h3></li>'
+        output = '<li class="faded-out"><h3>' + data.stream.channel.display_name + '</h3></li>'
         $outputEl.html($outputEl.html() + output);
       } else {
-        output = '<li><p>' + twitchStreamer + ' is offline </p></li>'
+        output = '<li class="faded-out"><p>' + twitchStreamer + ' is offline </p></li>'
         $offlineOutputEl.html($offlineOutputEl.html() + output);
       }
       $loadMoreButton.text('Load more');
-      
+      setTimeout(function(){
+        $('.faded-out').removeClass('faded-out').addClass('faded-in');
+      }, 300);
     },
     error: function(errorMessage){
           alert("error", errorMessage);

@@ -1,5 +1,6 @@
 body {
   background-color: #f2f2f2;
+  padding-bottom: 80px;
 }
 
 ul {
@@ -12,4 +13,33 @@ li {
   list-style: none;
   padding: 25px;
   margin: 1px;
+}
+
+button:focus { outline: none }
+
+.container {
+  padding: 2% 10% 2% 10%;
+}
+
+.load-more {
+	background-color: #e80000;
+	border: none;
+	color: white;
+	padding: 15px 30px;
+  font-size: 16px;
+}
+
+.faded-in, .faded-out {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.faded-out{
+  opacity: 0;
+  // transform: translate(0,40px);
+  transform: translate(40px, 0);
+}
+
+.faded-in{
+  opacity: 1;
+  transform: translate(0,0)
 }
